@@ -15,6 +15,9 @@ def recursion(n)
   end
 end
 
+
+
+
 # Función iterativa
 def iterativo(n)
   if 0 <= n && n < 49
@@ -32,6 +35,9 @@ def iterativo(n)
   end
 end
 
+
+
+
 # Función recursiva de cola
 def recursion_cola(n)
   dicResult = {}
@@ -39,26 +45,39 @@ def recursion_cola(n)
     dicResult[i] = i
   end
 
-  def recursion_cola_aux(n, dicResult)
-    if dicResult.key?(n)
+  def recursion_cola_aux(n, dicResult, key)
+    if key > n
       return dicResult[n]
     else
-      dicResult[n] = recursion_cola_aux(n - 7, dicResult) + recursion_cola_aux(n - 14, dicResult) + recursion_cola_aux(n - 21, dicResult) + recursion_cola_aux(n - 28, dicResult) + recursion_cola_aux(n - 35, dicResult) + recursion_cola_aux(n - 42, dicResult) + recursion_cola_aux(n - 49, dicResult)
-      return dicResult[n]
+      dicResult[key] = dicResult[key - 7] + dicResult[key - 14] + dicResult[key - 21] + dicResult[key - 28] + dicResult[key - 35] + dicResult[key - 42] + dicResult[key - 49]
+      return recursion_cola_aux(n, dicResult, key + 1)
     end
   end
 
-  return recursion_cola_aux(n, dicResult)
+  return recursion_cola_aux(n, dicResult, 49)
 end
+
+
 
 def main()
   values = [25, 50, 75, 100, 125]
   results = []
 
   values.each do |n|
-    iterativo_time = Benchmark.realtime { iterativo(n) }
-    recursivo_time = Benchmark.realtime { recursion(n) }
-    recursivo_cola_time = Benchmark.realtime { recursion_cola(n) }
+    puts ""
+    puts "----------------------------------- n = #{n} -----------------------------------"
+    puts ""
+    iterativo_result = nil
+    iterativo_time = Benchmark.realtime { iterativo_result = iterativo(n) }
+    puts "Iterativo: #{iterativo_result}, Tiempo: #{iterativo_time} segundos"
+
+    recursivo_result = nil
+    recursivo_time = Benchmark.realtime { recursivo_result = recursion(n) }
+    puts "Recursivo: #{recursivo_result}, Tiempo: #{recursivo_time} segundos"
+
+    recursivo_cola_result = nil
+    recursivo_cola_time = Benchmark.realtime { recursivo_cola_result = recursion_cola(n) }
+    puts "Recursivo de Cola: #{recursivo_cola_result}, Tiempo: #{recursivo_cola_time} segundos"
 
     results << [n, iterativo_time, recursivo_time, recursivo_cola_time]
   end
