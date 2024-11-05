@@ -40,3 +40,7 @@ main()
 # El algoritmo divide en dos partes el arreglo y llama al método merge para unir los arreglos izquierdo y derecho en cuanto a un orden ascendente
 # Una decisio de implementacion fue utilizar el método shift para eliminar el primer elemento de un arreglo
 # Otra decisión de implementación fue tomar los elementos de la mitad menos uno del arreglo para el arreglo izquierdo y los elementos de la mitad hasta el final del arreglo para el arreglo derecho
+
+# Decision para esta implementacion: Fue tomada la decision de implementar el algoritmo de mergesort para ordenar un arreglo de manera ascendente con recursividad y no con iteracion o recursividad de cola
+# ya que el algoritmo de mergesort es un algoritmo de ordenamiento eficiente y estable, y se puede implementar de manera sencilla con recursividad. Además, la implementación de mergesort con recursividad es más sencilla de entender y de implementar que con iteración o recursividad de cola.
+# Y no se necesita una implementacion tan eficiente dado que el arreglo a ordenar del ejemplo es pequeño.
